@@ -13,7 +13,7 @@ public class Client_Graph {
         graph.addEdge(2,5,1);
         graph.addEdge(4,5,1);
 
-        graph.display();
+        System.out.println(graph.BFS(1, 4));
     }
 
 }
