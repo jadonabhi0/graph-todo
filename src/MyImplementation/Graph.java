@@ -360,7 +360,9 @@ import java.util.*;
         }
 
 
-
+        public boolean isCyclic(){
+            return false;
+        }
 
 
 
