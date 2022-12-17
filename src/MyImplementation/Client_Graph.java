@@ -12,6 +12,8 @@ public class Client_Graph {
         graph.addEdge(1, 4, 5);
         graph.addEdge(1, 2, 10);
         graph.addEdge(2, 3, 7);
+        
+        
         graph.addEdge(3, 4, 2);
         graph.addEdge(4, 5, 12);
         graph.addEdge(5, 6, 3);
