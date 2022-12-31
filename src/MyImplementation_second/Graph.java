@@ -104,6 +104,96 @@ public class Graph {
         }
         return false;
     }
-    
+
+    public void printAllPath(int src, int dest, String psf, HashSet<Integer> visited){
+        if(src == dest){
+            psf = psf+" "+src;
+            System.out.println(psf);
+            return;
+        }
+        visited.add(src);
+
+        for(int key : map.get(src).keySet()){
+            if(!visited.contains(key)){
+                printAllPath(key, dest, psf+" "+src, visited);
+            }
+        }
+
+        visited.remove(src);
+    }
+
+    public boolean isConnected(){
+        Queue<Integer> q = new LinkedList<>();
+        HashSet<Integer> visited = new HashSet<>();
+        int count = 0;
+        for(int src : map.keySet()){
+            if(visited.contains(src)) continue;
+            q.offer(src);
+            visited.add(src);
+            count++;
+            while (!q.isEmpty()){
+                int rm = q.poll();
+                for (int key : map.get(rm).keySet()){
+                    if(!visited.contains(key)){
+                        q.offer(key);
+                        visited.add(key);
+                    }
+                }
+            }
+        }
+        return count == 1;
+    }
+
+    public void getAllConnectedComponents(){
+        Queue<Integer> q = new LinkedList<>();
+        HashSet<Integer> visited = new HashSet<>();
+        ArrayList<Integer> list ;
+
+        for(int src : map.keySet()){
+            if(visited.contains(src)) continue;
+            q.offer(src);
+            visited.add(src);
+            list = new ArrayList<>();
+            while (!q.isEmpty()){
+                int rm = q.poll();
+                list.add(rm);
+                for (int key : map.get(rm).keySet()){
+                    if(!visited.contains(key)){
+                        q.offer(key);
+                        visited.add(key);
+                    }
+                }
+            }
+            System.out.println(list);
+        }
+    }
+
+
+    public boolean isCyclic(){
+        HashSet<Integer> visited = new HashSet<>();
+        Queue<Integer> q = new LinkedList<>();
+
+        for(int src : map.keySet()){
+            if(visited.contains(src)) continue;
+            q.offer(src);
+
+            while (!q.isEmpty()){
+                int rm = q.poll();
+                if(visited.contains(rm)) return true;
+                visited.add(rm);
+                for(int key : map.get(rm).keySet()){
+                    if(!visited.contains(key)){
+                        q.offer(key);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+
+
+
+
 
 } // end of class
