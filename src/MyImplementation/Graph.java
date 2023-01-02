@@ -192,7 +192,7 @@ import java.util.*;
 
                     // adding nbrs
                     for (int key : map.get(rm).keySet()){
-                        if (visited.contains(key) == false)q.add(key);
+                        if (!visited.contains(key))q.add(key);
                     }
                 }
             }
@@ -227,7 +227,7 @@ import java.util.*;
 
                     // adding nbrs
                     for (int key : map.get(rm).keySet()){
-                        if (visited.contains(key) == false) st.push(key);
+                        if (!visited.contains(key)) st.push(key);
                     }
                 }
             }
@@ -359,7 +359,97 @@ import java.util.*;
             return ans;
         }
 
+        // Dijkstra Pair class
+        public class DijPair{
+            int vtx; // vertex
+            String psf; // path so far
+            int cost; // cost
 
+            // sweet sa constructor
+            DijPair(int vtx, String psf, int cost){
+                this.vtx = vtx;
+                this.psf = psf;
+                this.cost = cost;
+            }
+        }
+
+        /**
+         * Dijkstra algorithm gives the shortest path in-terms of cost from one source node to all nodes.
+         * @param src is the source vertex.
+         */
+        public void DijkstraAlgo(int src){
+            // visited array
+            HashSet<Integer> visited = new HashSet<>();
+
+            // priority queue, polls based on cost;
+            PriorityQueue<DijPair> pq = new PriorityQueue<>(new Comparator<DijPair>() {
+                @Override
+                public int compare(DijPair o1, DijPair o2) {
+                    return o1.cost - o2.cost;
+                }
+            });
+            DijPair pair = new DijPair(src, src+"", 0); // make src object
+            // add src to priority Queue
+            pq.add(pair);
+
+            while (!pq.isEmpty()){
+                // remove
+                DijPair rm = pq.poll();
+                // check
+                if (visited.contains(rm.vtx)) continue;
+                // mark visited
+                visited.add(rm.vtx);
+                // work
+                System.out.println(rm.vtx +" | via "+ rm.psf + " cost "+ rm.cost);
+                // add nbrs
+                for(int key : map.get(rm.vtx).keySet()){
+                    DijPair pair1 = new DijPair(key, rm.psf+"->"+key, rm.cost+map.get(rm.vtx).get(key));
+                    if(!visited.contains(key)){
+                        pq.add(pair1);
+                    }
+                }
+            }
+
+        }
+
+
+        class PrimsPair{
+            int src;
+            int ref;
+            int cost;
+            PrimsPair(int src, int ref, int cost){
+                this.src = src;
+                this.ref = ref;
+                this.cost = cost;
+            }
+        }
+
+
+        public void PrimsAlgo(){
+            HashSet<Integer> visited = new HashSet<>();
+            PriorityQueue<PrimsPair> pq = new PriorityQueue<>(new Comparator<PrimsPair>() {
+                @Override
+                public int compare(PrimsPair o1, PrimsPair o2) {
+                    return o1.cost - o2.cost;
+                }
+            });
+
+            pq.add(new PrimsPair(1,-1, 0));
+
+            while(!pq.isEmpty()){
+                PrimsPair rm = pq.poll();
+                if (visited.contains(rm.src)) continue;
+                visited.add(rm.src);
+                if (rm.ref != -1) {
+                    System.out.println("["+rm.ref+"->"+rm.src+"@"+rm.cost+"]");
+                }
+                for(int key : map.get(rm.src).keySet()){
+                    if (!visited.contains(key)){
+                        pq.add(new PrimsPair(key, rm.src, map.get(rm.src).get(key)));
+                    }
+                }
+            }
+        }
 
 
 

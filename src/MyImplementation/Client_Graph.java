@@ -40,11 +40,9 @@ public class Client_Graph {
 //        graph.printAllPath(1, 7, "", new HashSet<>());
 
 //        System.out.println(graph.graphIsConnected());
+//        graph.DijkstraAlgo(1);
 
-        for(ArrayList<Integer> lst : graph.getAllConnectedComponent()){
-            System.out.println(lst);
-        }
-
+        graph.PrimsAlgo();
 
     }
 
