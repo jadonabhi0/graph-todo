@@ -360,7 +360,7 @@ import java.util.*;
         }
 
         // Dijkstra Pair class
-        public class DijPair{
+       private class DijPair{
             int vtx; // vertex
             String psf; // path so far
             int cost; // cost
@@ -413,7 +413,7 @@ import java.util.*;
         }
 
 
-        class PrimsPair{
+       private class PrimsPair{
             int src;
             int ref;
             int cost;
@@ -441,7 +441,7 @@ import java.util.*;
                 if (visited.contains(rm.src)) continue;
                 visited.add(rm.src);
                 if (rm.ref != -1) {
-                    System.out.println("["+rm.ref+"->"+rm.src+"@"+rm.cost+"]");
+                    System.out.println("["+rm.ref+"->"+rm.src+" @ "+rm.cost+"]");
                 }
                 for(int key : map.get(rm.src).keySet()){
                     if (!visited.contains(key)){
