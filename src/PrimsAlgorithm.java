@@ -54,7 +54,6 @@ public class PrimsAlgorithm {
                 return o1.cost - o2.cost;
             }
         });
-
         pq.add(new PrimsPair(1,-1, 0));
 
         while(!pq.isEmpty()){
