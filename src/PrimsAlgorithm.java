@@ -34,19 +34,20 @@ public class PrimsAlgorithm {
         map.get(v2).put(v1, cost);
     }
 
-    private class PrimsPair{
+    private class PrimsPair {
         int src;
         int ref;
         int cost;
-        PrimsPair(int src, int ref, int cost){
+
+        PrimsPair(int src, int ref, int cost) {
             this.src = src;
             this.ref = ref;
             this.cost = cost;
         }
     }
 
-
     public void PrimsAlgo(){
+
         HashSet<Integer> visited = new HashSet<>();
         PriorityQueue<PrimsPair> pq = new PriorityQueue<>(new Comparator<PrimsPair>() {
             @Override
