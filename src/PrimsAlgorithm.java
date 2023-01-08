@@ -48,6 +48,8 @@ public class PrimsAlgorithm {
 
     public void PrimsAlgo(){
 
+
+
         HashSet<Integer> visited = new HashSet<>();
         PriorityQueue<PrimsPair> pq = new PriorityQueue<>(new Comparator<PrimsPair>() {
             @Override
