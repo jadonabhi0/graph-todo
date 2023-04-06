@@ -3,6 +3,7 @@ package MyImplementation_4.DirectedGraph;/*
 */
 
 import java.util.HashSet;
+import java.util.LinkedList;
 
 public class client {
     public static void main(String[] args) {
@@ -17,5 +18,6 @@ public class client {
         graph.addEdge(6,5);
         graph.printGraph();
         System.out.println(graph.isCyclicDFS(0, -1, new HashSet<>()));
+        System.out.println(graph.isCyclicBFS(0, new LinkedList<>(), new HashSet<>()));
     }
 }

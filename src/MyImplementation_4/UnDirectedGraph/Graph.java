@@ -5,6 +5,7 @@ package MyImplementation_4.UnDirectedGraph;/*
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Graph {
 
@@ -35,6 +36,21 @@ public class Graph {
                 if (hasCycle) return true;
             }else{
                 if(par != nbr) return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isCyclicBFS(int node, Queue<Integer> q, HashSet<Integer> vis){
+        q.add(node);
+        while(!q.isEmpty()){
+            int rm = q.poll();
+            if(vis.contains(rm)) return true;
+            vis.add(rm);
+            for(int nbr : map[rm]){
+                if(!vis.contains(nbr)){
+                    q.add(nbr);
+                }
             }
         }
         return false;

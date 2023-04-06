@@ -5,6 +5,7 @@ package MyImplementation_4.DirectedGraph;/*
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Graph {
 
@@ -21,12 +22,14 @@ public class Graph {
 
     }
 
+    // print the graph
     public void printGraph(){
         for(int i = 0 ; i < map.length ; i++){
             System.out.println(i+" -> "+map[i]);
         }
     }
 
+    // will detect the cycle
     public boolean isCyclicDFS(int node, int par, HashSet<Integer> set){
         set.add(node);
         for (int nbr : map[node]){
@@ -38,6 +41,21 @@ public class Graph {
             }
         }
         set.remove(node);
+        return false;
+    }
+
+
+
+    public boolean isCyclicBFS(int node, Queue<Integer> q, HashSet<Integer> vis){
+        q.add(node);
+        while(!q.isEmpty()){
+            int rm = q.poll();
+            vis.add(rm);
+            for(int nbr : map[rm]){
+                if(vis.contains(nbr)) return true;
+                q.add(nbr);
+            }
+        }
         return false;
     }
 
