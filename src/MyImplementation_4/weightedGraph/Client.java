@@ -14,6 +14,7 @@ public class Client {
         graph.addEdge(4, 5, 6);
         graph.addEdge(4, 6, 2);
         graph.addEdge(5, 6, 6);
-        graph.Dijkstra(0);
+        graph.Dijkstra(5);
+        graph.BellManFord(5);
     }
 }

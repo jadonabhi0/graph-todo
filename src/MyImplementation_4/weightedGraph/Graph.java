@@ -61,4 +61,47 @@ public class Graph {
     }
 
 
+    public void BellManFord(int src){
+        int[] dis = new int[map.length];
+        Arrays.fill(dis, Integer.MAX_VALUE);
+        dis[src] = 0;
+
+        for(int rel = 0 ; rel < map.length ; rel++){
+            for(int i = 0 ; i < map.length ; i++){
+                for(int[] ar : map[i]){
+                    int u = i;
+                    int v = ar[0];
+                    int wt = ar[1];
+                    if(dis[u] != Integer.MAX_VALUE && dis[u]+wt < dis[v]){
+                        dis[v] = dis[u]+wt;
+                    }
+                }
+            }
+        }
+
+        //-------- This block of code checks the cycle in graph -----.
+        for(int i = 0 ; i < map.length ; i++){
+            for(int[] ar : map[i]){
+                int u = i;
+                int v = ar[0];
+                int wt = ar[1];
+                if(dis[u] != Integer.MAX_VALUE && dis[u]+wt < dis[v]){
+                    System.out.println("This graph contains negative weight edge cycle");
+                    break;
+                }
+            }
+        }
+
+        //---------------------------------------------------------
+
+
+        // printing the distances
+        System.out.println("using the bellman ford algo");
+        for(int i = 0 ; i < map.length ; i++){
+            System.out.println(i+" -> "+dis[i]);
+        }
+
+    }
+
+
 }
