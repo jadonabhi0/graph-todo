@@ -2,10 +2,7 @@ package MyImplementation_4.DirectedGraph;/*
     @author jadon
 */
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class Graph {
 
@@ -46,18 +43,99 @@ public class Graph {
     }
 
 
-
+    @Deprecated
     public boolean isCyclicBFS(int node, Queue<Integer> q, HashSet<Integer> vis){
         q.add(node);
         while(!q.isEmpty()){
             int rm = q.poll();
+            if(vis.contains(rm)) return true;
             vis.add(rm);
             for(int nbr : map[rm]){
-                if(vis.contains(nbr)) return true;
-                q.add(nbr);
+                if(!vis.contains(nbr)) q.add(nbr);
             }
         }
         return false;
+    }
+
+
+    // Topological Sorting : It is a permutation of vertices for a Directed Acyclic Graph such that vertex (u, v)
+    // u always occurs before v in graph;
+
+    public void topologicalSort(List<Integer>[] map){
+        int [] vis = new int[map.length];
+        Stack<Integer> st= new Stack<>();
+        for(int i = 0 ; i < vis.length ; i++){
+            if(vis[i] == 0) dfsTop(map, vis, st, i);
+        }
+        System.out.println(st);
+        while (!st.isEmpty()){
+            System.out.print(st.pop()+" ");
+        }
+
+    }
+
+    public void dfsTop(List<Integer>[] map, int[] vis, Stack<Integer> st,  int node){
+        vis[node] = 1;
+        for(int nbr : map[node]){
+            if(vis[nbr] == 0)dfsTop(map, vis, st, nbr);
+        }
+        st.push(node);
+    }
+
+    //Topological order using Kahn’s topological sort
+    public void khansAlgo(){
+        if (isCyclicTopoSort()) return;
+        int [] indegree = new int[map.length];
+        // calculating indegree
+        for(int i = 0 ; i < map.length ; i++){
+            for(int nbr : map[i]){
+                indegree[nbr]++;
+            }
+        }
+
+        Queue<Integer> q = new LinkedList<>();
+        for(int i : indegree){
+            if (i == 0) q.add(i);
+        }
+
+        // bfs
+        while(!q.isEmpty()){
+            int rm = q.poll();
+            System.out.print(rm+" ");
+            for(int nbr : map[rm]){
+                indegree[nbr]--;
+                if(indegree[nbr] == 0) q.add(nbr);
+            }
+        }
+    }
+
+    public boolean isCyclicTopoSort(){
+        int [] indegree = new int[map.length];
+        // calculating indegree
+        for(int i = 0 ; i < map.length ; i++){
+            for(int nbr : map[i]){
+                indegree[nbr]++;
+            }
+        }
+
+        Queue<Integer> q = new LinkedList<>();
+        for(int i : indegree){
+            if (i == 0) q.add(i);
+        }
+
+        // bfs
+        int count = 0;
+        while(!q.isEmpty()){
+            int rm = q.poll();
+            count++;
+            for(int nbr : map[rm]){
+                indegree[nbr]--;
+                if(indegree[nbr] == 0) q.add(nbr);
+            }
+        }
+
+        if(count == map.length) return false;
+        return true;
     }
 
 

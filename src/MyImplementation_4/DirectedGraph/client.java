@@ -18,6 +18,11 @@ public class client {
         graph.addEdge(6,5);
         graph.printGraph();
         System.out.println(graph.isCyclicDFS(0, -1, new HashSet<>()));
-        System.out.println(graph.isCyclicBFS(0, new LinkedList<>(), new HashSet<>()));
+//        System.out.println(graph.isCyclicBFS(0, new LinkedList<>(), new HashSet<>()));
+        graph.topologicalSort(graph.map);
+        System.out.println();
+        graph.khansAlgo();
+        System.out.println();
+        System.out.println(graph.isCyclicTopoSort());
     }
 }
