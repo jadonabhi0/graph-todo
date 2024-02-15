@@ -31,6 +31,7 @@ public class DijkstraAlgorithm {
         }
 
 
+        
         // Dijkstra Pair class
         class DijPair{
             int vtx; // vertex
