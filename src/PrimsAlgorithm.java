@@ -8,8 +8,6 @@ public class PrimsAlgorithm {
     //hashmap is used to store the edges and vertex inorder to get better complexity.
     private HashMap<Integer, HashMap<Integer, Integer>> map;
 
-
-
     /**
      * Constructor of graph class.
      * @param v is number of vertex.
