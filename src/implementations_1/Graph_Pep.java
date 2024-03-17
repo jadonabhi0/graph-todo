@@ -23,8 +23,6 @@ public class Graph_Pep {
            graph[i] = new ArrayList<>();
        }
    }
-
-
     public void addEdge(int src, int nbr, int wt){
         Edge edge1 = new Edge(src, nbr, wt);
         Edge edge2 = new Edge(nbr, src, wt);
