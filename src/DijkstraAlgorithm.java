@@ -7,7 +7,6 @@ public class DijkstraAlgorithm {
 
         //hashmap is used to store the edges and vertex inorder to get better complexity.
         private HashMap<Integer, HashMap<Integer, Integer>> map;
-
         /**
          * Constructor of graph class.
          * @param v is number of vertex.
@@ -18,7 +17,6 @@ public class DijkstraAlgorithm {
                 map.put(i, new HashMap<>());
             }
         }
-
         /**
          * Add an edge between two vertex of graph.
          * @param v1 represent the vertex.
@@ -30,8 +28,6 @@ public class DijkstraAlgorithm {
             map.get(v2).put(v1, cost);
         }
 
-
-        
         // Dijkstra Pair class
         class DijPair{
             int vtx; // vertex
